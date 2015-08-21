@@ -37,9 +37,9 @@ if(isset($argv[1])) {
 				$m = $api->getMatch($match_id,'includeTimeline=true');
 				if (isset($m["timeline"])) {
 					$matches->insert($m);
-					printf("inserted match " . $pos . " / " . $total_matches . " for " . $region . " norms");
+					printf("inserted match " . $pos . " / " . $total_matches . " for " . $region . " norms\n");
 				} else {
-					printf("Missing timeline: match " . $pos . " / " . $total_matches);
+					printf("Missing timeline: match " . $pos . " / " . $total_matches . "\n");
 				}
 				$pos++;
 			}
@@ -65,9 +65,9 @@ if(isset($argv[1])) {
 				$m = $api->getMatch($match_id,'includeTimeline=true');
 				if (isset($m["timeline"])) {
 					$matches->insert($m);
-					printf("inserted match " . $pos . " / " . $total_matches . " for " . $region . " ranked");
+					printf("inserted match " . $pos . " / " . $total_matches . " for " . $region . " ranked\n");
 				} else {
-					printf("Missing timeline: match " . $pos . " / " . $total_matches);
+					printf("Missing timeline: match " . $pos . " / " . $total_matches . "\n");
 				}
 				$pos++;
 			}
