@@ -331,7 +331,6 @@ class riotapi {
 	private function format_url($call, $otherQueries=false){
 		//because sometimes your url looks like .../something/foo?query=blahblah&api_key=dfsdfaefe
 		$ret = str_replace('{region}', $this->REGION, $call) . ($otherQueries ? '&' : '?') . 'api_key=' . $this->API_KEY;
-		print($ret);
 		return $ret;
 	}
 
