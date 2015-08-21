@@ -321,7 +321,10 @@ class riotapi {
 		            $result = json_decode($result, true);
 	        	}
 			} else {
-				throw new Exception(self::$errorCodes[$this->responseCode]);
+				print(self::$errorCodes[$this->responseCode]);
+				print('trying ' . $call . ' again in 5s');
+				sleep(5);
+				return $this->request($call, $otherQueries);
 			}
 		}
 		return $result;
