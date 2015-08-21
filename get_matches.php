@@ -26,7 +26,7 @@ if(isset($argv[1])) {
 		$region = strtolower(basename($file, ".json"));
 		$region_matches = json_decode(file_get_contents($norms_path."/".$file), true);
 		$total_matches = count($region_matches);
-		$pos = 0
+		$pos = 0;
 
 		//Initialize API wrapper
 		$api = new riotapi($region, $api_key);
@@ -54,7 +54,7 @@ if(isset($argv[1])) {
 		$region = strtolower(basename($file, ".json"));
 		$region_matches = json_decode(file_get_contents($ranked_path."/".$file), true);
 		$total_matches = count($region_matches);
-		$pos = 0
+		$pos = 0;
 
 		//Initialize API wrapper
 		$api = new riotapi($region, $api_key);
