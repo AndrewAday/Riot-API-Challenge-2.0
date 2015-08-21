@@ -124,8 +124,8 @@ class riotapi {
 
 	//New to my knowledge. Returns match details.
 	public function getMatch($matchId) {
-		$call = self::API_URL_2_2  . 'match/' . $matchId;
-		return $this->request($call);
+		$call = self::API_URL_2_2  . 'match/' . $matchId . '?includeTimeline=true';
+		return $this->request($call, $otherQueries=true);
 	}
 
 	//Returns a user's matchHistory given their summoner id.
@@ -330,7 +330,9 @@ class riotapi {
 	//creates a full URL you can query on the API
 	private function format_url($call, $otherQueries=false){
 		//because sometimes your url looks like .../something/foo?query=blahblah&api_key=dfsdfaefe
-		return str_replace('{region}', $this->REGION, $call) . ($otherQueries ? '&' : '?') . 'api_key=' . $this->API_KEY;
+		$ret = str_replace('{region}', $this->REGION, $call) . ($otherQueries ? '&' : '?') . 'api_key=' . $this->API_KEY;
+		print($ret);
+		return $ret;
 	}
 
 	public function getLastResponseCode(){

@@ -7,7 +7,7 @@ include('includes/wrapper/FileSystemCache.php');
 $summoner_name = "machinaxxx"; 
 // $summoner_id = 585897;
 
-$test = new riotapi('oce', '8d44fc30-4ef3-4a8e-8aae-a6b124e37f21');
+$test = new riotapi('na', '8d44fc30-4ef3-4a8e-8aae-a6b124e37f21');
 
 
 // $testCache = new riotapi('na', new FileSystemCache('cache/'));
@@ -26,7 +26,7 @@ $test = new riotapi('oce', '8d44fc30-4ef3-4a8e-8aae-a6b124e37f21');
 try {
 	for($i=0; $i < 1; $i++) {
 		// $r = $test->getSummonerByName($summoner_name);
-		$r = $test->getMatch('98509596','includeTimeline=true');
+		$r = $test->getMatch('1900737137','includeTimeline=true');
     	print_r($r);
     	print_r($i);
 	}
