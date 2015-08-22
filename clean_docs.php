@@ -3,9 +3,9 @@
 require_once 'includes/db_connect.php';
 include 'includes/parse_match.php';
 include 'includes/major_items.php';
-$number = $matches->count()
+$number = $matches->count();
 $counter = 1;
-$cursor = $matches->find()
+$cursor = $matches->find();
 foreach($cursor as $doc) {
 	$matchId = $doc['matchId'];
 	if ($matches->remove(['matchId' => $matchId])) {
@@ -13,7 +13,7 @@ foreach($cursor as $doc) {
 	}
 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
 	$matches->insert($match_trim);
-
+	$counter++
 }
 
 ?>
