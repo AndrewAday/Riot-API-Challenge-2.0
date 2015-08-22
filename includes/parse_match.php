@@ -27,8 +27,9 @@ function parseMatch($match, $MAJOR_ITEMS) {
 		
 		unset($match['timeline']['frames'][$frame_counter]['participantFrames']);
 
-		$counter = 0;
+		
 		if (isset($frame['events'])) {
+			$counter = 0;
 			foreach($frame['events'] as $event) {
 				if($event['eventType'] != 'ITEM_PURCHASED') {
 					unset($match['timeline']['frames'][$frame_counter]['events'][$counter]);
@@ -38,9 +39,11 @@ function parseMatch($match, $MAJOR_ITEMS) {
 						unset($match['timeline']['frames'][$frame_counter]['events'][$counter]); //remove event if not a major purchase by non-support
 				}
 
-				$counter++;
+				
+				$counter++;	
 			}
-			$frame['events'] = array_values($frame['events']); //reset indices
+			if (count($match['timeline']['frames'][$frame_counter]['events']) == 0)
+				unset($match['timeline']['frames'][$frame_counter]);
 		}
 		$frame_counter++;
 	}
