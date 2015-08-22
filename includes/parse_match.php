@@ -17,12 +17,14 @@ function parseMatch($match) {
 		unset($frame['participantFrames']);
 
 		$counter = 0;
-		foreach($frame['events'] as $event) {
-			if($event['eventType'] != 'ITEM_PURCHASED')
-				unset($frame['events'][$counter]);
-			$counter++;
+		if (isset($frame['events'])) {
+			foreach($frame['events'] as $event) {
+				if($event['eventType'] != 'ITEM_PURCHASED')
+					unset($frame['events'][$counter]);
+				$counter++;
+			}
+			$frame['events'] = array_values($frame['events']); //reset indices
 		}
-		$frame['events'] = array_values($frame['events']); //reset indices
 	}
 }
 
