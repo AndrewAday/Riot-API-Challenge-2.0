@@ -18,8 +18,8 @@ function parseMatch($match, $MAJOR_ITEMS) {
 		}
 		$counter++;
 	}
-	print($support_1 . "\n");
-	print($support_2 . "\n");
+	//print($support_1 . "\n");
+	//print($support_2 . "\n");
 
 	$supports = array($support_1, $support_2);
 
