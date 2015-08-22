@@ -16,7 +16,7 @@ function parseMatch($match) {
 		
 		unset($frame['participantFrames']);
 
-		var $counter = 0;
+		$counter = 0;
 		foreach($frame['events'] as $event) {
 			if($event['eventType'] != 'ITEM_PURCHASED')
 				unset($frame['events'][$counter]);
