@@ -13,8 +13,19 @@ foreach(scandir($norms_path) as $file) {
 
 $doc = $matches->findOne();
 $doc = parseMatch($doc);
-print_r(json_encode($doc));
-
-
+print_r(json_encode($doc) . "\n");
+//print_r($doc['timeline']);
+$counter = 0;
+/*foreach($doc['timeline']['frames'] as $frame) {
+	
+	unset($frame['participantFrames']);
+	if (isset($frame['events'])) {
+		print_r($counter . PHP_EOL);	
+	}
+	
+	$counter++;
+}
+print_r($counter."\n");
+*/
 
 ?>
