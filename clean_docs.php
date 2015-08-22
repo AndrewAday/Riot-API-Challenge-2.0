@@ -13,7 +13,7 @@ foreach($cursor as $doc) {
 	}
 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
 	$matches->insert($match_trim);
-	$counter++
+	$counter++;
 }
 
 ?>
