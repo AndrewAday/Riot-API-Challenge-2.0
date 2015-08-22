@@ -3,6 +3,7 @@
 
 $norms_path = "AP_ITEM_DATASET/5.14/NORMAL_5X5/key_1/";
 require_once 'includes/db_connect.php';
+include 'includes/parse_match.php';
 
 foreach(scandir($norms_path) as $file) {
 		if ('.' === $file) continue;
@@ -11,7 +12,9 @@ foreach(scandir($norms_path) as $file) {
 	}
 
 $doc = $matches->findOne();
-print_r($doc);
+$doc = parseMatch($doc);
+print_r(json_encode($doc));
+
 
 
 ?>
