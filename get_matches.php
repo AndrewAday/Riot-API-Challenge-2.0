@@ -1,7 +1,8 @@
 <?php
 include('includes/wrapper/php-riot-api.php');
 include('includes/wrapper/FileSystemCache.php');
-
+include('includes/major_items.php');
+include('includes/parse_match.php');
 
 
 //Set DB
@@ -36,7 +37,8 @@ if(isset($argv[1])) {
 			foreach($region_matches as $match_id) {
 				$m = $api->getMatch($match_id,'includeTimeline=true');
 				if (isset($m["timeline"])) {
-					$matches->insert($m);
+					$m_clean = parseMatch($m,$MAJOR_ITEMS);
+					$matches->insert($m_clean);
 					printf("inserted match " . $pos . " / " . $total_matches . " for " . $region . " norms\n");
 				} else {
 					printf("Missing timeline: match " . $pos . " / " . $total_matches . "\n");
