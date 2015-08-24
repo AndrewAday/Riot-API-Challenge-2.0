@@ -141,7 +141,7 @@ foreach($champions as $champKey=>$champion)
 {
 	foreach($champion as $laneKey=>$lane)
 	{	
-		if ($lanekey != 'name') {
+		if ($laneKey != 'name') {
 			foreach($lane as $interval => $value) {
 				if ($value['players'] > 0)
 					$champions[$champKey][$laneKey][$interval]['stdev'] = pow($value['stdev'] / ($value['players']), 0.5);
