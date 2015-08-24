@@ -5,23 +5,27 @@ include 'includes/parse_match.php';
 include 'includes/major_items.php';
 $number = $matches->count();
 $counter = 1;
-$cursor = $matches->find();
+$cursor = $matches->find()->skip(124600);
 
-while ($counter <= $number) {
-	try {
-		$doc = $cursor->next();
-		print_r($doc . "\n");
-		$matchId = $doc['matchId'];
-	 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
-	 	if ($matches->update($doc, $match_trim)) {
-			print_r($matchId . " updated " . $counter . "/" . $number . "\n");
-		}	
-	} catch (Exception $e) {
-		echo 'Caught exception: ',  $e->getMessage(), "\n";
-		echo 'skip insertion' . $counter;
-	}
-	$counter++;
-}
+
+
+var_dump(iterator_to_array($cursor));
+
+// while ($counter <= $number) {
+// 	try {
+// 		$doc = $cursor->next();
+// 		print_r($doc . "\n");
+// 		$matchId = $doc['matchId'];
+// 	 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
+// 	 	if ($matches->update($doc, $match_trim)) {
+// 			print_r($matchId . " updated " . $counter . "/" . $number . "\n");
+// 		}	
+// 	} catch (Exception $e) {
+// 		echo 'Caught exception: ',  $e->getMessage(), "\n";
+// 		echo 'skip insertion' . $counter;
+// 	}
+// 	$counter++;
+// }
 
 
 /*
