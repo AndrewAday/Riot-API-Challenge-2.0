@@ -85,7 +85,7 @@ foreach($cursor as $match) {
 		// $champions[$champ][$lane]['gold30']+=$gpms['thirtyToEnd'];
 		// $champions[$champ][$lane]['players']++;
 	}
-	print("Cumulating gold " . $match['matchId'] . " " . $counter . "/100" . "\n");
+	print("Cumulating gold " . $match['matchId'] . " " . $counter . "/" . $total . "\n");
 	$counter++;
 }
 //average
@@ -133,7 +133,7 @@ foreach($cursor as $match) {
 			$champions[$champ][$lane][$gpm_deltas[$key]]['stdev'] += pow($value-$champions[$champ][$lane][$gpm_deltas[$key]]['gold'],2);
 		}
 	}
-	print("Cumulating stdev match " . $counter . "/100\n");
+	print("Cumulating stdev match " . $counter . "/" . $total . "\n");
 	$counter++;
 }
 //calculate from totals
