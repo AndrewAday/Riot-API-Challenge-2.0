@@ -8,12 +8,9 @@ $counter = 1;
 $cursor = $matches->find();
 foreach($cursor as $doc) {
  	$matchId = $doc['matchId'];
- 	if ($matches->remove(['matchId' => $matchId])) {
- 		print_r($matchId . " removed " . $counter . "/" . $number . "\n");
- 	}
  	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
- 	if ($matches->insert($match_trim)) {
-		print_r($matchId . " inserted " . $counter . "/" . $number . "\n");
+ 	if ($matches->update($doc, $match_trim)) {
+		print_r($matchId . " updated " . $counter . "/" . $number . "\n");
 	}
 		
  	$counter++;
