@@ -23,11 +23,14 @@ function parseMatch($match, $MAJOR_ITEMS) {
 	unset($match['teams']);
 	//Strip events
 	$frame_counter = 0;
+	if (is_assoc($match['timeline']['frames'])) {
+		return $match; //don't change doc at all
+	}
+
 	foreach($match['timeline']['frames'] as $frame) {
 		
 		unset($match['timeline']['frames'][$frame_counter]['participantFrames']);
 
-		
 		if (isset($frame['events'])) {
 			$counter = 0;
 			foreach($frame['events'] as $event) {
@@ -48,6 +51,16 @@ function parseMatch($match, $MAJOR_ITEMS) {
 		$frame_counter++;
 	}
 	return $match;
+}
+
+public static function is_assoc(array $array)
+{
+    // Keys of the array
+    $keys = array_keys($array);
+
+    // If the array keys of the keys match the keys, then the array must
+    // not be associative (e.g. the keys array looked like {0:0, 1:1...}).
+    return array_keys($keys) !== $keys;
 }
 
 ?>
