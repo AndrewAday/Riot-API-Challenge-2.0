@@ -53,7 +53,7 @@ function parseMatch($match, $MAJOR_ITEMS) {
 	return $match;
 }
 
-public static function is_assoc(array $array)
+function is_assoc(array $array)
 {
     // Keys of the array
     $keys = array_keys($array);
