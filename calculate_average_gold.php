@@ -57,7 +57,7 @@ foreach($cursor as $match) {
 		}
 		$champ_name = $CHAMPIONS[$champ]['name'];
 		$lane=$participant['timeline']['lane'];
-		if(!array_key_exists($participant['championId'], $champions))
+		if(!array_key_exists($champ, $champions))
 		{
 			$champions[$champ]= []; //Add key as champion id
 			$champions[$champ]['name'] = $champ_name; //Add champion name
@@ -89,6 +89,9 @@ foreach($cursor as $match) {
 	$counter++;
 }
 //average
+
+print_r(json_encode($champions . "\n"));
+exit;
 
 foreach($champions as $champKey=>$champion)
 {
