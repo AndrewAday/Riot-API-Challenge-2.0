@@ -98,10 +98,10 @@ foreach($champions as $champKey=>$champion)
 	foreach($champion as $laneKey=>$lane)
 	{	
 		if ($laneKey != 'name') {
-		foreach($lane as $interval => $value) {
-			if ($value['players'] > 0)
-				$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
-		}
+			foreach($lane as $interval => $value) {
+				if ($value['players'] > 0)
+					$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
+			}
 		}
 		// $champions[$champKey][$laneKey]['gold0']=$lane['gold0']/$lane['players'];
 		// $champions[$champKey][$laneKey]['gold10']=$lane['gold10']/$lane['players'];
@@ -133,17 +133,20 @@ foreach($cursor as $match) {
 			$champions[$champ][$lane][$gpm_deltas[$key]]['stdev'] += pow($value-$champions[$champ][$lane][$gpm_deltas[$key]]['gold'],2);
 		}
 	}
-	print("Cumulating stdev match " . $counter . "/100 . \n");
+	print("Cumulating stdev match " . $counter . "/100\n");
 	$counter++;
 }
 //calculate from totals
 foreach($champions as $champKey=>$champion)
 {
 	foreach($champion as $laneKey=>$lane)
-	{
-		foreach($lane as $interval => $value) {
-			$champions[$champKey][$laneKey][$interval]['stdev'] = pow($value['stdev'] / ($value['players'] - 1), 0.5);
+	{	
+		if ($lanekey != 'name') {
+			foreach($lane as $interval => $value) {
+				if ($value['players'] > 0)
+					$champions[$champKey][$laneKey][$interval]['stdev'] = pow($value['stdev'] / ($value['players']), 0.5);
 
+			}
 		}
 		// $champions[$champKey][$laneKey]['stdev0']=pow($lane['stdev0']/$lane['players'],0.5);
 		// $champions[$champKey][$laneKey]['stdev10']=pow($lane['stdev10']/$lane['players'],0.5);
@@ -152,7 +155,7 @@ foreach($champions as $champKey=>$champion)
 	}
 }
 
-print_r(json_encode($champions . "\n"));
+print_r(json_encode($champions) . "\n");
 // $file = fopen('includes/static-data/average_gold.json', 'w');
 // fwrite($file, json_encode($champions));
 // fclose($file);
