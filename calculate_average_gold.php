@@ -80,7 +80,7 @@ foreach($cursor as $match) {
 		// $champions[$champ][$lane]['gold30']+=$gpms['thirtyToEnd'];
 		// $champions[$champ][$lane]['players']++;
 	}
-	print("Cumulating gold match " . $counter . "/100" . "\n");
+	print("Cumulating gold " . $match['matchId'] . " " . $counter . "/100" . "\n");
 	$counter++;
 }
 //average
