@@ -42,8 +42,8 @@ $gpm_deltas = [
 	'thirtyToEnd' => 'gold30'
 ];
 
-// $cursor = $matches->find();
-$cursor = $matches->find()->limit(100);
+$cursor = $matches->find();
+// $cursor = $matches->find()->limit(100);
 $total = $matches->count();
 $counter = 1;
 //Average gold
@@ -155,8 +155,8 @@ foreach($champions as $champKey=>$champion)
 	}
 }
 
-print_r(json_encode($champions) . "\n");
-// $file = fopen('includes/static-data/average_gold.json', 'w');
-// fwrite($file, json_encode($champions));
-// fclose($file);
+// print_r(json_encode($champions) . "\n");
+$file = fopen('includes/static-data/average_gold.json', 'w');
+fwrite($file, json_encode($champions));
+fclose($file);
 ?>
