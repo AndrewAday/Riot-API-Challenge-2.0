@@ -6,15 +6,22 @@ include 'includes/major_items.php';
 $number = $matches->count();
 $counter = 1;
 $cursor = $matches->find();
-foreach($cursor as $doc) {
- 	$matchId = $doc['matchId'];
- 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
- 	if ($matches->update($doc, $match_trim)) {
-		print_r($matchId . " updated " . $counter . "/" . $number . "\n");
+
+while ($counter <= $number) {
+	try {
+		$doc = $cursor->next();
+		$matchId = $doc['matchId'];
+	 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
+	 	if ($matches->update($doc, $match_trim)) {
+			print_r($matchId . " updated " . $counter . "/" . $number . "\n");
+		}	
+	} catch (Exception $e) {
+		echo 'Caught exception: ',  $e->getMessage(), "\n";
+		echo 'skip insertion' . $counter;
 	}
-		
- 	$counter++;
- }
+	$counter++;
+}
+
 
 /*
 $doc = $matches->findOne(['matchId' => 573468770]);
