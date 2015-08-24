@@ -10,6 +10,7 @@ $cursor = $matches->find();
 while ($counter <= $number) {
 	try {
 		$doc = $cursor->next();
+		print_r($doc . "\n");
 		$matchId = $doc['matchId'];
 	 	$match_trim = parseMatch($doc,$MAJOR_ITEMS);
 	 	if ($matches->update($doc, $match_trim)) {
