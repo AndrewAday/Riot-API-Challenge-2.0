@@ -99,7 +99,8 @@ foreach($champions as $champKey=>$champion)
 	{	
 		if ($laneKey != 'name') {
 		foreach($lane as $interval => $value) {
-			$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
+			if ($value['players'] > 0)
+				$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
 		}
 		}
 		// $champions[$champKey][$laneKey]['gold0']=$lane['gold0']/$lane['players'];
@@ -114,6 +115,11 @@ $counter = 1;
 foreach($cursor as $match) {
 	foreach($match['participants'] as $participant) {
 		$champ=$participant['championId'];
+		if(!array_key_exists($champ, $CHAMPIONS)) {
+			//THEN IT'S A FRIGGIN BOT 
+			print("SKIPPING BOT " . $champ . "\n");
+			continue;
+		}
 		$lane=$participant['timeline']['lane'];
 		// if(!array_key_exists($lane,$champions[$champ]['stdev0']))
 		// {
