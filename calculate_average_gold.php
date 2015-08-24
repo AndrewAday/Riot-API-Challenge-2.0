@@ -90,15 +90,17 @@ foreach($cursor as $match) {
 }
 //average
 
-print_r(json_encode($champions . "\n"));
-exit;
+//print_r(json_encode($champions) . "\n");
+
 
 foreach($champions as $champKey=>$champion)
 {
 	foreach($champion as $laneKey=>$lane)
-	{
+	{	
+		if ($laneKey != 'name') {
 		foreach($lane as $interval => $value) {
 			$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
+		}
 		}
 		// $champions[$champKey][$laneKey]['gold0']=$lane['gold0']/$lane['players'];
 		// $champions[$champKey][$laneKey]['gold10']=$lane['gold10']/$lane['players'];
