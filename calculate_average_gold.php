@@ -8,9 +8,9 @@ $cursor = $matches->find();
 //Average gold
 foreach($cursor as $match) {
 	foreach($match['participants'] as $participant) {
-		$champ=$participant['championid'];
+		$champ=$participant['championId'];
 		$lane=$participant['ParticipantTimeline']['lane'];
-		if(!array_key_exists($participant['championid'], $champions))
+		if(!array_key_exists($participant['championId'], $champions))
 		{
 			$addChamp=[];
 			$champions[$champ]=$addChamp;
@@ -48,7 +48,7 @@ foreach($champions as $champKey=>$champion)
 //stdev
 foreach($cursor as $match) {
 	foreach($match['participants'] as $participant) {
-		$champ=$participant['championid'];
+		$champ=$participant['championId'];
 		$lane=$participant['ParticipantTimeline']['lane'];
 		if(!array_key_exists($lane,$champions[$champ]['stdev0']))
 		{
