@@ -5,11 +5,11 @@ include 'includes/parse_match.php';
 include 'includes/major_items.php';
 $number = $matches->count();
 $counter = 1;
-$cursor = $matches->find()->skip(124600);
+$cursor = $matches->find()->skip(124500);
 
 
 
-var_dump(iterator_to_array($cursor));
+var_dump($cursor->getNext());
 
 // while ($counter <= $number) {
 // 	try {
