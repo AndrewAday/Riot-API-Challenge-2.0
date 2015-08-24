@@ -45,11 +45,16 @@ $gpm_deltas = [
 // $cursor = $matches->find();
 $cursor = $matches->find()->limit(100);
 $total = $matches->count();
-$counter = 0;
+$counter = 1;
 //Average gold
 foreach($cursor as $match) {
 	foreach($match['participants'] as $participant) {
 		$champ=$participant['championId'];
+		if(!array_key_exists($champ, $CHAMPIONS)) {
+			//THEN IT'S A FRIGGIN BOT 
+			print("SKIPPING BOT " . $champ . "\n");
+			continue;
+		}
 		$champ_name = $CHAMPIONS[$champ]['name'];
 		$lane=$participant['timeline']['lane'];
 		if(!array_key_exists($participant['championId'], $champions))
@@ -89,8 +94,8 @@ foreach($champions as $champKey=>$champion)
 {
 	foreach($champion as $laneKey=>$lane)
 	{
-		foreach($gpm_deltas as $gpmKey => $value) {
-			$champions[$champKey][$laneKey][$value]['gold'] = $lane[$value]['gold'] / $lane[$value]['players'];
+		foreach($lane as $interval => $value) {
+			$champions[$champKey][$laneKey][$interval]['gold'] = $value['gold'] / $value['players'];
 		}
 		// $champions[$champKey][$laneKey]['gold0']=$lane['gold0']/$lane['players'];
 		// $champions[$champKey][$laneKey]['gold10']=$lane['gold10']/$lane['players'];
@@ -100,7 +105,7 @@ foreach($champions as $champKey=>$champion)
 }
 
 //stdev
-$counter = 0;
+$counter = 1;
 foreach($cursor as $match) {
 	foreach($match['participants'] as $participant) {
 		$champ=$participant['championId'];
@@ -125,8 +130,8 @@ foreach($champions as $champKey=>$champion)
 {
 	foreach($champion as $laneKey=>$lane)
 	{
-		foreach($gpm_deltas as $gpmKey => $value) {
-			$champions[$champKey][$laneKey][$value]['stdev'] = pow($lane[$value]['stdev'] / $lane[$value]['players']);
+		foreach($lane as $interval => $value) {
+			$champions[$champKey][$laneKey][$interval]['stdev'] = pow($value['stdev'] / $value['players']);
 
 		}
 		// $champions[$champKey][$laneKey]['stdev0']=pow($lane['stdev0']/$lane['players'],0.5);
