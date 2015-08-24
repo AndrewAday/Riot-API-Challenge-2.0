@@ -42,9 +42,9 @@ $gpm_deltas = [
 	'thirtyToEnd' => 'gold30'
 ];
 
-$cursor = $matches->find();
+$cursor = $matches->find()->limit(124590);
 // $cursor = $matches->find()->limit(100);
-$total = $matches->count();
+$total = 124590;
 $counter = 1;
 //Average gold
 foreach($cursor as $match) {
