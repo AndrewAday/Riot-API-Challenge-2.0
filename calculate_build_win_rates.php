@@ -252,8 +252,13 @@ foreach($champions as $champKey=>$champion)
 	{
 		foreach($lane as $itemKey=>$item)//first item
 		{
-			if(is_numeric($itemKey))//CHECK IF THIS IS LEGIT
+			if(is_numeric($itemKey))
 			{
+				if($item['medWin']+$item['medLoss']<100)//Might want to tune these cutoffs
+				{
+					unset($champions[$champ][$lane][$itemKey]);
+					continue;
+				}
 				$champions[$champ][$lane][$itemKey]['lowWin']=$item['lowWin']/($item['lowWin']+$item['lowLoss']);
 				$champions[$champ][$lane][$itemKey]['medWin']=$item['medWin']/($item['medWin']+$item['medLoss']);
 				$champions[$champ][$lane][$itemKey]['highWin']=$item['highWin']/($item['highWin']+$item['highLoss']);
@@ -265,6 +270,11 @@ foreach($champions as $champKey=>$champion)
 				{
 					if(is_numeric($itemKey2))
 					{
+						if($item2['medWin']+$item2['medLoss']<25)
+						{
+							unset($champions[$champ][$lane][$itemKey][$itemKey2]);
+							continue;
+						}
 						$champions[$champ][$lane][$itemKey][$itemKey2]['lowWin']=$item2['lowWin']/($item2['lowWin']+$item2['lowLoss']);
 						$champions[$champ][$lane][$itemKey][$itemKey2]['medWin']=$item2['medWin']/($item2['medWin']+$item2['medLoss']);
 						$champions[$champ][$lane][$itemKey][$itemKey2]['highWin']=$item2['highWin']/($item2['highWin']+$item2['highLoss']);
@@ -274,8 +284,13 @@ foreach($champions as $champKey=>$champion)
 
 						foreach($item2 as $itemKey3=>$item3)//third item
 						{
-							if(is_numeric($itemKey2))
+							if(is_numeric($itemKey3))
 							{
+								if($item3['medWin']+$item3['medLoss']<10)
+								{
+									unset($champions[$champ][$lane][$itemKey][$itemKey2][$itemKey3]);
+									continue;
+								}
 								$champions[$champ][$lane][$itemKey][$itemKey2][$itemKey3]['lowWin']=$item3['lowWin']/($item3['lowWin']+$item3['lowLoss']);
 								$champions[$champ][$lane][$itemKey][$itemKey2][$itemKey3]['medWin']=$item3['medWin']/($item3['medWin']+$item3['medLoss']);
 								$champions[$champ][$lane][$itemKey][$itemKey2][$itemKey3]['highWin']=$item3['highWin']/($item3['highWin']+$item3['highLoss']);
