@@ -128,10 +128,15 @@ class riotapi {
 		return $this->request($call, $otherQueries=true);
 	}
 
-	//Returns a user's matchHistory given their summoner id.
-	public function getMatchHistory($id) {
-		$call = self::API_URL_2_2  . 'matchhistory/' . $id;
-		return $this->request($call);
+	//Returns a user's matchHistory given their summoner id and optional champion.
+	public function getMatchHistory($id, $champion=-1) {
+		if($champion==-1)
+		{
+			$call = self::API_URL_2_2  . 'matchhistory/' . $id;
+			return $this->request($call);
+		}
+		$call = self::API_URL_2_2  . 'matchhistory/' . $id.'?championIds='.$champion;
+		return $this->request($call, $otherQueries=true);
 	}
 
 	//Returns game statistics given a summoner's id.
