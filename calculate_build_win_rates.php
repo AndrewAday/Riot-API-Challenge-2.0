@@ -286,7 +286,7 @@ foreach($champions as $champKey=>$champion)
 						{
 							if(is_numeric($itemKey3))
 							{
-								if($item3['medWin']+$item3['medLoss']<10)
+								if($item3['medWin']+$item3['medLoss']<15)
 								{
 									unset($champions[$champ][$lane][$itemKey][$itemKey2][$itemKey3]);
 									continue;
@@ -306,7 +306,6 @@ foreach($champions as $champKey=>$champion)
 	}
 }
 
-//unset win/loss fields
 $file = fopen('includes/static-data/build_win_rates.json', 'w');
 fwrite($file, json_encode($champions));
 fclose($file);
