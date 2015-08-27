@@ -23,10 +23,10 @@ foreach($cursor as $match) {
 	}
 	foreach($participants as $key => $participant) {
 		$champ=$participant['championid'];
-		$lane=$participant['ParticipantTimeline']['lane'];
+		$lane=$participant['timeline']['lane'];
 		$win=$match['teams'][$participant['teamId']]['winner'];
 
-		if(abs(($participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen']-$champions[$champ][$lane]['gold0'])/$champions[$champ][$lane]['stdev0'])>2.575)
+		if(abs(($participant['timeline']['goldPerMinDeltas']['zeroToTen']-$champions[$champ][$lane]['gold0'])/$champions[$champ][$lane]['stdev0'])>2.575)
 			continue; //cut top/bottom 0.5% of economy. Perhaps adjust in the future, but 0.5% is approx number of leavers. Maybe don't cut the top end.
 
 		if(count($participant['items'])>0)
@@ -47,7 +47,7 @@ foreach($cursor as $match) {
 			if($item['timestamp']<600000)
 			{
 				$expected=$champions[$champ][$lane]['gold0'];
-				$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen'];
+				$econ=$participant['timeline']['goldPerMinDeltas']['zeroToTen'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev0'];
 			}
 			else if($item['timestamp']<1200000)
@@ -55,10 +55,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold10'];
 				if($item['timestamp']<780000)//3 minute offset
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*($item['timestamp']-600000))/$item['timestamp'];
+					$econ=($participant['timeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['timeline']['goldPerMinDeltas']['tenToTwenty']*($item['timestamp']-600000))/$item['timestamp'];
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['tenToTwenty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev10'];
 			}
 			else if($item['timestamp']<1800000)
@@ -66,10 +66,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold20'];
 				if($item['timestamp']<1380000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*($item['timestamp']-600000))/($item['timestamp']-600000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['timeline']['goldPerMinDeltas']['twentyToThirty']*($item['timestamp']-600000))/($item['timestamp']-600000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['twentyToThirty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev20'];
 			}
 			else
@@ -77,10 +77,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold30'];
 				if($item['timestamp']<1980000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd']*($item['timestamp']-600000))/($item['timestamp']-1200000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['timeline']['goldPerMinDeltas']['thirtyToEnd']*($item['timestamp']-600000))/($item['timestamp']-1200000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['thirtyToEnd'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev30'];
 			}
 
@@ -118,7 +118,7 @@ foreach($cursor as $match) {
 			if($item2['timestamp']<600000)
 			{
 				$expected=$champions[$champ][$lane]['gold0'];
-				$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen'];
+				$econ=$participant['timeline']['goldPerMinDeltas']['zeroToTen'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev0'];
 			}
 			else if($item2['timestamp']<1200000)
@@ -126,10 +126,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold10'];
 				if($item2['timestamp']<780000)//3 minute offset
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*($item2['timestamp']-600000))/$item2['timestamp'];
+					$econ=($participant['timeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['timeline']['goldPerMinDeltas']['tenToTwenty']*($item2['timestamp']-600000))/$item2['timestamp'];
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['tenToTwenty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev10'];
 			}
 			else if($item2['timestamp']<1800000)
@@ -137,10 +137,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold20'];
 				if($item2['timestamp']<1380000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*($item2['timestamp']-600000))/($item2['timestamp']-600000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['timeline']['goldPerMinDeltas']['twentyToThirty']*($item2['timestamp']-600000))/($item2['timestamp']-600000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['twentyToThirty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev20'];
 			}
 			else
@@ -148,10 +148,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold30'];
 				if($item2['timestamp']<1980000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd']*($item2['timestamp']-600000))/($item2['timestamp']-1200000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['timeline']['goldPerMinDeltas']['thirtyToEnd']*($item2['timestamp']-600000))/($item2['timestamp']-1200000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['thirtyToEnd'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev30'];
 			}
 
@@ -189,7 +189,7 @@ foreach($cursor as $match) {
 			if($item3['timestamp']<600000)
 			{
 				$expected=$champions[$champ][$lane]['gold0'];
-				$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen'];
+				$econ=$participant['timeline']['goldPerMinDeltas']['zeroToTen'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev0'];
 			}
 			else if($item3['timestamp']<1200000)
@@ -197,10 +197,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold10'];
 				if($item3['timestamp']<780000)//3 minute offset
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*($item3['timestamp']-600000))/$item3['timestamp'];
+					$econ=($participant['timeline']['goldPerMinDeltas']['zeroToTen']*600000+$participant['timeline']['goldPerMinDeltas']['tenToTwenty']*($item3['timestamp']-600000))/$item3['timestamp'];
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['tenToTwenty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev10'];
 			}
 			else if($item3['timestamp']<1800000)
@@ -208,10 +208,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold20'];
 				if($item3['timestamp']<1380000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*($item3['timestamp']-600000))/($item3['timestamp']-600000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['tenToTwenty']*600000+$participant['timeline']['goldPerMinDeltas']['twentyToThirty']*($item3['timestamp']-600000))/($item3['timestamp']-600000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['twentyToThirty'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev20'];
 			}
 			else
@@ -219,10 +219,10 @@ foreach($cursor as $match) {
 				$expected=$champions[$champ][$lane]['gold30'];
 				if($item3['timestamp']<1980000)
 				{
-					$econ=($participant['ParticipantTimeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd']*($item3['timestamp']-600000))/($item3['timestamp']-1200000);
+					$econ=($participant['timeline']['goldPerMinDeltas']['twentyToThirty']*600000+$participant['timeline']['goldPerMinDeltas']['thirtyToEnd']*($item3['timestamp']-600000))/($item3['timestamp']-1200000);
 				}
 				else
-					$econ=$participant['ParticipantTimeline']['goldPerMinDeltas']['thirtyToEnd'];
+					$econ=$participant['timeline']['goldPerMinDeltas']['thirtyToEnd'];
 				$zscore=($econ-$expected)/$champions[$champ][$lane]['stdev30'];
 			}
 
