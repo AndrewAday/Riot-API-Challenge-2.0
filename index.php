@@ -11,6 +11,13 @@ else
 {
 	$championsEcon = json_decode(file_get_contents('includes/static-data/champions.json'), true);
 	$champion=$championsEcon[$champions['data'][$_GET['champion']]['key'];
+	foreach($champion as $laneId=>$lane)
+	{
+		if($laneId!='name')
+		{
+			
+		}
+	}
 	//show the builds
 	//calculate econ
 }
